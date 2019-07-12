@@ -10,3 +10,7 @@
     border: 1px #ced4da solid;
     border-radius: 10px;
 }
+
+.login-form h2 {
+    margin-bottom: 25px;
+}
