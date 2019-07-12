@@ -11,6 +11,8 @@ import logger from 'redux-logger';
 
 import rootReducer from './reducers';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // create store
 const store = createStore(
     rootReducer,
