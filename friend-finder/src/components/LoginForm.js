@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import '../styles/Login.css';
+
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+
 class LoginForm extends Component {
     constructor(props) {
         super(props)
@@ -13,7 +17,7 @@ class LoginForm extends Component {
     handleLogin = e => {
         e.preventDefault()
         /* save username and password to localStorage? */
-        
+
         /* add login function passed down */
     }
 
@@ -26,25 +30,35 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleLogin}>
+            <Form className='login-form' onSubmit={this.handleLogin}>
 
-                <input
-                    type='text'
-                    name='username'
-                    value={this.state.username}
-                    onChange={this.handleTextChange}
-                    placeholder='Username'
-                />
-                <input
-                    type='password'
-                    name='password'
-                    value={this.state.password}
-                    onChange={this.handleTextChange}
-                    placeholder='Password'
-                />
-                <button>Login</button>
+                <h2>Login</h2>
 
-            </form>
+                <FormGroup>
+                    <Label>Username</Label>
+                    <Input
+                        type='text'
+                        name='username'
+                        value={this.state.username}
+                        onChange={this.handleTextChange}
+                        placeholder='Username'
+                    />
+                </FormGroup>
+                
+                <FormGroup>
+                    <Label>Password</Label>
+                    <Input
+                        type='password'
+                        name='password'
+                        value={this.state.password}
+                        onChange={this.handleTextChange}
+                        placeholder='Password'
+                    />
+                </FormGroup>
+                
+                <Button color='primary'>Login</Button>
+
+            </Form>
         )
     }
 }
