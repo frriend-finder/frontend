@@ -41,7 +41,7 @@ class LoginForm extends Component {
                         name='username'
                         value={this.state.username}
                         onChange={this.handleTextChange}
-                        placeholder='Username'
+                        placeholder=''
                     />
                 </FormGroup>
                 
@@ -52,7 +52,7 @@ class LoginForm extends Component {
                         name='password'
                         value={this.state.password}
                         onChange={this.handleTextChange}
-                        placeholder='Password'
+                        placeholder=''
                     />
                 </FormGroup>
                 
