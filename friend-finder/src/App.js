@@ -21,7 +21,7 @@ function App() {
         <Route path='/memberlist' component={MemberList} /> {/* delete later */}
         <Route path='/login' component={Login} />
         <Route path='/signup' component={NewUserForm} />
-        <Route path='/landing' component={UserLanding} /> {/* Maybe change the url to user's username later */}
+        <Route path='/' component={UserLanding} /> {/* Maybe change the url to user's username later */}
         {/* <PrivateRoute exact path='' component={} /> */}
 
       </div>
