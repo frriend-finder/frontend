@@ -1,11 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
+import '../styles/MemberCard.css';
 
-class MemberCard extends Component {
-    render() {
+const MemberCard = props => {
+     
         return (
-            <></>
+            
+                <div className="member-card">
+                    <img src = {`${props.member.profileimage}`} alt="members profile picture" />
+                    <h1>{props.member.firstName + " " + props.member.lastName} </h1>
+                    <h2>{props.member.age}</h2>
+                    <h2>{props.member.location}</h2>
+                </div>
         )
     }
-}
+
 
 export default MemberCard;
+
+/*
+
+            firstName: "John",
+            lastName:"Smith",
+            age:35,
+            emailAddress:"email@email.com",
+            gender:"male",
+            phone:"555-555-5555",
+            profileimage:'',
+            catchPhrase:"Be all you can be",
+            location:"New York",
+            interestArray:["Sports", "Movies", "Dancing"] 
+
+
+
+
+*/
