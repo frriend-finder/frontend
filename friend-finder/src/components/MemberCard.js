@@ -5,10 +5,10 @@ class MemberCard extends Component {
         return (
             <div className='member-card'>
                 {/* Info on other members to show */}
-                <p>Picture:</p>
-                <p>Name:</p>
-                <p>Age:</p>
-                <p>City:</p>
+                <p>Picture: {this.props.member.picture}</p>
+                <p>{`Name: ${this.props.member.firstName} ${this.props.member.lastName}`}</p>
+                <p>Age: {this.props.member.age}</p>
+                <p>City: {this.props.member.city}</p>
                 <button>Match</button>
                 <button>Move On</button>
             </div>
