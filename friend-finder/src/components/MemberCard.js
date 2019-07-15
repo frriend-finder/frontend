@@ -5,7 +5,6 @@ import '../styles/MemberCard.css';
 const MemberCard = props => {
      
         return (
-            
                 <div className="member-card">
                     <img src = {`${props.member.profileimage}`} alt="members profile picture" />
                     <h1>{props.member.firstName + " " + props.member.lastName} </h1>
