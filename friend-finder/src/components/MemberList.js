@@ -28,7 +28,7 @@ addToFriends = (e, id) => {
                     <div className= "members-list-wrapper">
                             {
                                 this.props.members.map(member => {
-                                   return  <MemberCard member= {member} key={member.id} addToFriends = {this.addToFriends}/>
+                                    return  <MemberCard member= {member} key={member.id} addToFriends = {this.addToFriends}/>
                                 })
                             }
                     
