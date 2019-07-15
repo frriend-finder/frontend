@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { login } from '../actions';
 
 import '../styles/Login.css';
 
@@ -9,22 +12,27 @@ class LoginForm extends Component {
         super(props)
 
         this.state = {
-            username: '',
-            password: ''
+            credentials: {
+                username: '',
+                password: ''
+            }
         }
     }
 
     handleLogin = e => {
         e.preventDefault()
-        /* save username and password to localStorage? */
-
-        /* add login function passed down */
+        this.props
+            .login(this.state.credentials)
+            .then(() => this.props.history.push('/userlanding'));
     }
 
     handleTextChange = e => {
         e.preventDefault()
         this.setState({
-            [e.target.name]: e.target.value
+            credentials: {
+                ...this.state.credentials,
+                [e.target.name]: e.target.value
+            }
         })
     }
 
@@ -63,4 +71,7 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default connect(
+    null,
+    { login }
+)(LoginForm);
