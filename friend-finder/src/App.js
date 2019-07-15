@@ -5,7 +5,7 @@ import './styles/App.css';
 import { BrowserRouter as Router, Route, Navlinks } from 'react-router-dom';
 
 // import components
-// import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute';
 import Navigation from './components/Navigation';
 import Login from './components/LoginForm';
 import UserLanding from './components/UserLanding';
@@ -24,10 +24,7 @@ function App() {
         <Route path='/login' component={Login} />
         <Route path='/signup' component={NewUserForm} />
         <Route exact path='/' component={UserLanding} /> {/* Maybe change the url to user's username later */}
-        {/* <PrivateRoute exact path='' component={} /> */}
-
-        <Route path='/memberslist' component={MembersList} />
-
+        <PrivateRoute exact path='/userlanding' component={MembersList} />
 
       </div>
     </Router>
