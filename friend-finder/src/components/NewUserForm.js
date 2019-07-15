@@ -33,6 +33,26 @@ class NewUserForm extends Component {
         console.log(this.state)
     }
 
+    handleGenderSelect = e => {
+        e.preventDefault()
+        for (let _ = 0; _ < e.target.length; _++) {
+            if (e.target[_].selected === true) {
+                this.setState({ gender: e.target[_].innerHTML })
+            }
+        }
+    }
+
+    handleInterestSelect = e => {
+        e.preventDefault()
+        let selectedInterests = []
+        for (let i = 0; i < e.target.length; i++) {
+            if (e.target[i].selected === true) {
+                selectedInterests.push(e.target[i].innerHTML)
+            }
+        }
+        this.setState({ interests: selectedInterests })
+    }
+
     handleTextChange = e => {
         e.preventDefault()
         this.setState({
@@ -83,19 +103,11 @@ class NewUserForm extends Component {
 
                 <FormGroup>
                     <Label>Gender</Label>
-                    <Input
-                        type='text'
-                        name='gender'
-                        value={this.state.gender}
-                        onChange={this.handleTextChange}
-                    />
-                    {/* Didn't know how to get Input type='select' to work */}
-
-                    {/* <Input type='select' name='gender'>
+                    <Input type='select' name='gender' onChange={(e) => this.handleGenderSelect(e)}>
                         <option>Select...</option>
-                        <option onChange={() => console.log('male')}>Male</option>
-                        <option onChange={() => console.log('female')}>Female</option>
-                    </Input> */}
+                        <option>Male</option>
+                        <option>Female</option>
+                    </Input>
                 </FormGroup>
 
                 <FormGroup>
@@ -186,19 +198,21 @@ class NewUserForm extends Component {
 
                 <FormGroup>
                     <Label>Interests</Label>
-                    <Input
-                        type='text'
-                        name='interests'
-                        value={this.state.interests}
-                        onChange={this.handleTextChange}
-                    />
-                    {/* Didn't know how to get Input type='select' to work */}
-
-                    {/* <Input type='select' name='interests' multiple>
-                        <option>Select...</option>
-                        <option onChange={() => console.log('male')}>Male</option>
-                        <option onChange={() => console.log('female')}>Female</option>
-                    </Input> */}
+                    <Input type='select' name='interests' multiple onChange={this.handleInterestSelect}>
+                        <option>Art</option>
+                        <option>Cooking</option>
+                        <option>Dancing</option>
+                        <option>Food</option>
+                        <option>Health/Exercise</option>
+                        <option>Movies</option>
+                        <option>Music</option>
+                        <option>Pets</option>
+                        <option>Photography</option>
+                        <option>Politics</option>
+                        <option>Shopping</option>
+                        <option>Sports</option>
+                        <option>Travel</option>
+                    </Input>
                 </FormGroup>
 
                 <Button color='primary'>Submit</Button>
