@@ -22,7 +22,7 @@ render(){
            {
                this.state.isLoggedIn? 
             <li><Link to="/">LogOut</Link></li>:
-            <li><Link exact to="/login">Login</Link></li> 
+            <li><Link to="/login">Login</Link></li> 
             }
             
         </ul>
