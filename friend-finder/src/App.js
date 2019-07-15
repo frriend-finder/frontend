@@ -21,7 +21,7 @@ function App() {
         <Navigation />
 
         {/* Routes */}
-        <Route exact path='/login' component={Login} />
+        <Route path='/login' component={Login} />
         <Route path='/signup' component={NewUserForm} />
         <Route exact path='/' component={UserLanding} /> {/* Maybe change the url to user's username later */}
         {/* <PrivateRoute exact path='' component={} /> */}

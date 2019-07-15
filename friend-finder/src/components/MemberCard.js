@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from "react-bootstrap/Button"
 import '../styles/MemberCard.css';
 
 const MemberCard = props => {
@@ -10,6 +11,7 @@ const MemberCard = props => {
                     <h1>{props.member.firstName + " " + props.member.lastName} </h1>
                     <h2>{props.member.age}</h2>
                     <h2>{props.member.location}</h2>
+                    <Button onClick = {(e) => {props.addToFriends(e,props.member.id)}}>Add to Friends</Button>
                 </div>
         )
     }
