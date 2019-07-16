@@ -62,11 +62,11 @@ const rootReducer = (state = initialState, action) => {
                 loggingIn: true
             };
 
-         case ADD_TO_FRIENDS:
-             return({
-                 ...state,
-                 friends: [...state.friends, action.payload]
-             })  
+        case ADD_TO_FRIENDS:
+            return({
+                ...state,
+                friends: [...state.friends, action.payload]
+            })  
 
         default:
             return state;

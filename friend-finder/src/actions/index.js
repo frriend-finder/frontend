@@ -9,12 +9,14 @@ export const login = creds => dispatch => {
         .post()
         .then(res => localStorage.setItem('token', 'faketoken123'))
         .catch(err => {})
-    // return axios
-    //     .post('' /* endpoint for login */, creds)
-    //     .then(res => {} /* save token to localStorage from res */)
-    //     .catch(err => {} /* handle login error */);
 }
 
+export const addNewUser = () => dispatch => {
+    return axios
+        .post()
+        .then()
+        .catch(err => {})
+}
 
 export const addToFriends = member =>{ 
     
