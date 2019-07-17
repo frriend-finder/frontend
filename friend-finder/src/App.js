@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/App.css';
 
 
-import { BrowserRouter as Router, Route, Navlinks } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // import components
 // import PrivateRoute from './components/PrivateRoute';
@@ -11,15 +11,15 @@ import Login from './components/LoginForm';
 import UserLanding from './components/UserLanding';
 import NewUserForm from './components/NewUserForm';
 import MembersList from './components/MemberList';
+import UserHomePage from './components/UserHomePage';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-        </header>
         <Navigation />
-
+        <div className="main-wrapper">
         {/* Routes */}
         <Route path='/login' component={Login} />
         <Route path='/signup' component={NewUserForm} />
@@ -27,8 +27,9 @@ function App() {
         {/* <PrivateRoute exact path='' component={} /> */}
 
         <Route path='/memberslist' component={MembersList} />
-
-
+        <Route path= '/userhomepage' component={UserHomePage}/>
+        </div>
+        <Footer />
       </div>
     </Router>
   );

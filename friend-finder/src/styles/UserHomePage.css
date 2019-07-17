@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette|Roboto&display=swap');
+
+.user-info-wrapper{
+    width: 90%;
+    margin: 0 auto;
+    background-color: #D9D9D9;
+    color: #4484CE;
+    border-radius: 10px;
+}
+
+.user-info-wrapper .user-header-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding:2%;
+
+}
+
+.user-info-wrapper .user-header-wrapper img {
+    width:200px;
+    height:200px;
+    border-radius:50%;
+
+}
+
+.user-info-wrapper .user-header-wrapper span{
+    color: #F19F4D;
+    font-family: 'Courgette', cursive;
+}
+
+.tab-wrapper{
+    width:90%;
+    margin: 3% auto 0 auto;
+    border: 1px solid gainsboro;
+}
+
+.tab-content-wrapper{
+    margin: 2%;
+}
+
+.tab-content-wrapper .label-text{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.tab-content-wrapper p{
+    font-size: 20px;
+}
+
+

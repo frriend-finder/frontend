@@ -13,7 +13,7 @@ export const login = creds => dispatch => {
 
 
 export const addToFriends = member =>{ 
-    
+    console.log('Member in action',member)
         return({
             type: ADD_TO_FRIENDS,
             payload: member

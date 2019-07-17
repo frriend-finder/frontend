@@ -4,5 +4,15 @@
      flex-flow: row wrap;
      margin: 0 auto;
      width: 90% ;
-     
+
+ }
+
+
+ .members-list-header{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 90% ;
  }
