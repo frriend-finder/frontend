@@ -49,8 +49,10 @@ addToFriends = (member) => {
                     <div className= "members-list-wrapper">
                    
                             {
+
                                 this.state.members.map(member => {
                                    return  <MemberCard member= {member} key={member.id} addToFriends = {this.addToFriends} cardInstance = {this.instance}/>
+
                                 })
                             }
                     
