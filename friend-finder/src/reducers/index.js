@@ -1,12 +1,15 @@
 // import variable names from actions
 import {
-    LOGIN_START ,
+    LOGIN_START,
+    ADD_NEW_USER_START,
+    ADD_NEW_USER_SUCCESS,
+    ADD_NEW_USER_FAILURE,
     ADD_TO_FRIENDS
 } from '../actions';
 
-
 const initialState = {
     loggingIn: false,
+    addingNewUser: false,
     error: '',
     members: [
         {
@@ -62,11 +65,32 @@ const rootReducer = (state = initialState, action) => {
                 loggingIn: true
             };
 
+        case ADD_NEW_USER_START:
+            return {
+                ...state,
+                addingNewUser: true,
+                error: '',
+            };
+        
+        case ADD_NEW_USER_SUCCESS:
+            return {
+                ...state,
+                addingNewUser: false,
+                error: ''
+            };
+
+        case ADD_NEW_USER_FAILURE:
+            return {
+                ...state,
+                addingNewUser: false,
+                error: action.payload
+            };
+
         case ADD_TO_FRIENDS:
             return({
                 ...state,
                 friends: [...state.friends, action.payload]
-            })  
+            })
 
         default:
             return state;
