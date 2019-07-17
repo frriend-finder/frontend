@@ -5,30 +5,54 @@ import { addToFriends } from '../actions';
 
 import '../styles/MembersList.css'
 
+
 class MemberList extends Component {
 
     state = {
-        members: this.props.members
+        members: [],
+        friends: []
     }
 
+  instance = "memberlist" ;
+   
 
-addToFriends = (e, id) => {
-        e.preventDefault();
-        const member = this.props.members.filter(member =>{
-                return member.id === id  
-        })
-
-        this.props.addToFriends(member);
-            
+componentDidMount(){
+    this.setState({
+        members: this.props.members,
+        friends: this.props.friends
+    })
 }
+
+
+addToFriends = (member) => {
+    // Check our state to see if the friend was already added
+    const currentFriend = this.state.friends.find(f => f.id === member.id)
+    if(currentFriend){
+        alert('Friend already exists')
+    } else {
+        this.props.addToFriends(member) 
+        this.setState({friends: [...this.state.friends, member]}) // to make this work you need to implement this here or else the redux state will not update the state here as the component never reloads just with above Redux state update
+        alert(`${member.firstName + " " + member.lastName} has been added to your Friends List!`)
+    }
+}
+
 
     render() {
         return (
             <>
+                    <div className = "members-list-header" >
+                    <h1>Members List</h1>
+                    <h2>Lets see who we can meet!</h2>
+                
+                    </div>
+                    <hr/>
                     <div className= "members-list-wrapper">
+                   
                             {
-                                this.props.members.map(member => {
-                                    return  <MemberCard member= {member} key={member.id} addToFriends = {this.addToFriends}/>
+
+                                this.state.members.map(member => {
+                                   return  <MemberCard member= {member} key={member.id} addToFriends = {this.addToFriends} cardInstance = {this.instance}/>
+
                                 })
                             }
                     
@@ -40,7 +64,8 @@ addToFriends = (e, id) => {
 
 const mapStateToProps = state => {
     return {
-        members : state.members,
+        members: state.members,
+        friends: state.friends
     }
 }
 
