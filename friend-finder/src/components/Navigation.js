@@ -21,7 +21,7 @@ render(){
           
            {
             this.state.isLoggedIn? 
-            <><li><Link to="/userhomepage">Home</Link></li> | <li><Link to="/">Log Out</Link></li> | <li><Link to="/memberslist">Find Friends</Link></li> </> :
+            <><li><Link to="/">Home</Link></li> | <li><Link to="/">Log Out</Link></li> | <li><Link to="/memberslist">Find Friends</Link></li> </> :
             <><li><Link to="/">Home</Link></li> | <li><Link to="/login">Login</Link></li> </>
             }
             
