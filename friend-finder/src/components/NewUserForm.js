@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
+import { addNewUser } from '../actions';
+
 import '../styles/Signup.css';
 
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -9,18 +13,19 @@ class NewUserForm extends Component {
         super(props)
 
         this.state = {
+            id: 10,
             firstName: '',
             lastName: '',
-            birthday: '',
+            age: '',
             email: '',
             gender: '',
             phone: '',
-            picture: '', // Must be valid URL for now
+            imageUrl: '', // Must be valid URL for now
             address: '',
             city: '',
             state: '',
             zip: '',
-            interests: [],
+            // interests: [],
             catchPhrase: ''
         }
     }
@@ -31,6 +36,7 @@ class NewUserForm extends Component {
         someone fills out the form. Needs to be replaced
         with the actual AddUser function */
         console.log(this.state)
+        this.props.addNewUser(this.state)
     }
 
     handleGenderSelect = e => {
@@ -92,11 +98,11 @@ class NewUserForm extends Component {
                 </Row>
                 
                 <FormGroup>
-                    <Label>Birthday</Label>
+                    <Label>Age</Label>
                     <Input
-                        type='date'
-                        name='birthday'
-                        value={this.state.birthday}
+                        type='text'
+                        name='age'
+                        value={this.state.age}
                         onChange={this.handleTextChange}
                     />
                 </FormGroup>
@@ -134,8 +140,8 @@ class NewUserForm extends Component {
                     <Label>Profile Pic URL</Label>
                     <Input
                         type='url'
-                        name='picture'
-                        value={this.state.picture}
+                        name='imageUrl'
+                        value={this.state.imageUrl}
                         onChange={this.handleTextChange}
                     />
                 </FormGroup>
@@ -196,7 +202,7 @@ class NewUserForm extends Component {
                     </Col>
                 </Row>
 
-                <FormGroup>
+                {/* <FormGroup>
                     <Label>Interests</Label>
                     <Input type='select' name='interests' multiple onChange={this.handleInterestSelect}>
                         <option>Art</option>
@@ -213,7 +219,7 @@ class NewUserForm extends Component {
                         <option>Sports</option>
                         <option>Travel</option>
                     </Input>
-                </FormGroup>
+                </FormGroup> */}
 
                 <Button color='primary'>Submit</Button>
             </Form>
@@ -221,4 +227,12 @@ class NewUserForm extends Component {
     }
 }
 
-export default NewUserForm;
+const mapStateToProps = state => ({
+    addingNewUser: state.addingNewUser,
+    error: state.error
+})
+
+export default connect(
+    mapStateToProps,
+    { addNewUser }
+)(NewUserForm);
