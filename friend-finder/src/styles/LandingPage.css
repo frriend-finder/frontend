@@ -22,7 +22,7 @@
 .logo-wrapper{
     display: flex;
     align-items: center;
-    width: 45%;
+    width: 35%;
     margin: 0 auto 0 2%;;
     /* border: 2px solid orange;  DELETE ME*/
 }
@@ -35,21 +35,19 @@
 .link-wrapper{
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    align-content: space-between;
-   /*  border: 2px solid red; /* DELETE ME*/
-    width: 50%;
+    width: 60%;
     text-shadow: 5px 5px 5px rgba(0,0,0,0.5)
    
 }
 
 .link-wrapper li{
-    margin: 5%;
+  
 }
 
 .link-wrapper li a{
-    margin: 5%;
+    margin: 1%;
     color: white;
     font-size: 1.6rem;
     text-decoration: none;
