@@ -29,3 +29,4 @@ export const addToFriends = member =>{
             payload: member
         })
 }
+
