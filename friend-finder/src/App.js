@@ -21,11 +21,11 @@ function App() {
         <Navigation />
         <div className="main-wrapper">
         {/* Routes */}
+        <Route exact path='/' component={UserLanding} /> {/* Maybe change the url to user's username later */}
         <Route path='/login' component={Login} />
         <Route path='/signup' component={NewUserForm} />
-        <Route exact path='/' component={UserLanding} /> {/* Maybe change the url to user's username later */}
-        <PrivateRoute exact path='/userhomepage' component={UserHomePage} />
         <Route path='/memberslist' component={MembersList} />
+        <PrivateRoute exact path='/userhomepage' component={UserHomePage} />
         </div>
         <Footer />
       </div>

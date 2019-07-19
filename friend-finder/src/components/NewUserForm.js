@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 
+// import dependencies
 import { connect } from 'react-redux';
+import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
+// import actions
 import { addNewUser } from '../actions';
 
+// import styling
 import '../styles/Signup.css';
-
-import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class NewUserForm extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            id: 10,
             firstName: '',
             lastName: '',
             age: '',
@@ -32,10 +33,6 @@ class NewUserForm extends Component {
 
     handleAddUser = e => {
         e.preventDefault()
-        /* This is just to see the state after
-        someone fills out the form. Needs to be replaced
-        with the actual AddUser function */
-        console.log(this.state)
         this.props.addNewUser(this.state)
     }
 
@@ -73,7 +70,7 @@ class NewUserForm extends Component {
                 <h2>Sign Up!</h2>
 
                 <Row form>
-                    <Col md={6}>
+                    <Col md={5}>
                         <FormGroup>
                             <Label>First Name</Label>
                             <Input
@@ -84,7 +81,7 @@ class NewUserForm extends Component {
                             />
                         </FormGroup>
                     </Col>
-                    <Col md={6}>
+                    <Col md={5}>
                         <FormGroup>
                             <Label>Last Name</Label>
                             <Input
@@ -95,17 +92,18 @@ class NewUserForm extends Component {
                             />
                         </FormGroup>
                     </Col>
+                    <Col md={2}>
+                        <FormGroup>
+                            <Label>Age</Label>
+                            <Input
+                                type='text'
+                                name='age'
+                                value={this.state.age}
+                                onChange={this.handleTextChange}
+                            />
+                        </FormGroup>
+                    </Col>
                 </Row>
-                
-                <FormGroup>
-                    <Label>Age</Label>
-                    <Input
-                        type='text'
-                        name='age'
-                        value={this.state.age}
-                        onChange={this.handleTextChange}
-                    />
-                </FormGroup>
 
                 <FormGroup>
                     <Label>Gender</Label>
