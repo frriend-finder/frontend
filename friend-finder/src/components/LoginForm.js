@@ -20,7 +20,6 @@ class LoginForm extends Component {
 
     handleLogin = e => {
         e.preventDefault()
-        console.log(this.state)
         this.props
             .login(this.state.email, this.state.creds)
             .then(() => this.props.history.push('/userhomepage'));
@@ -77,12 +76,9 @@ class LoginForm extends Component {
                     </TabPane>
 
                     <Button color='primary' type='submit' onClick={(e) => {
-                        console.log('0')
                         if (this.state.activeTab === '1') {
-                            console.log('1')
                             this.handleSendCode(e)
                         } else {
-                            console.log('2')
                             this.handleLogin(e)
                         }
                     }}>{`${this.state.activeTab === '1' ? 'Send Code' : 'Login'}`}</Button>
