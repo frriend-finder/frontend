@@ -49,3 +49,30 @@
 }
 
 
+.interest-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid  #4484CE;
+    width: 175px;
+    height: 50px;
+    margin: 2%;
+    border-radius:3px;
+    color:  #4484CE;
+    box-shadow: 2px 5px 8px rgba(0,0,0,0.2);
+}
+
+.delete-interest-button{
+
+  
+    position:fixed;
+    margin-left:5%;
+    text-align: center;
+    margin-top:-10px;
+    width:25px;
+    height:25px;
+    box-shadow: 2px 5px 8px rgba(0,0,0,0.2);
+    border-radius:3px;
+}
+
+
