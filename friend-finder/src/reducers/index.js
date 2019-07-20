@@ -6,6 +6,7 @@ import {
     LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
+    LOGOUT_START,
     ADD_NEW_USER_START,
     ADD_NEW_USER_SUCCESS,
     ADD_NEW_USER_FAILURE,
@@ -13,6 +14,7 @@ import {
 } from '../actions';
 
 const initialState = {
+    isLoggedIn: false,
     loggingIn: false,
     addingNewUser: false,
     sendingCode: false,
@@ -50,19 +52,29 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggingIn: true,
+                isLoggedIn: false,
                 error: ''
             };
 
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                loggingIn: false
+                loggingIn: false,
+                isLoggedIn: true
             }
 
         case LOGIN_FAILURE:
             return {
                 ...state,
-                loggingIn: false
+                loggingIn: false,
+                isLoggedIn: false,
+                error: action.payload
+            }
+
+        case LOGOUT_START:
+            return {
+                ...state,
+                isLoggedIn: false,
             }
 
         case ADD_NEW_USER_START:

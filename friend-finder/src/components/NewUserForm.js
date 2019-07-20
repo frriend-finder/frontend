@@ -33,7 +33,9 @@ class NewUserForm extends Component {
 
     handleAddUser = e => {
         e.preventDefault()
-        this.props.addNewUser(this.state)
+        this.props
+            .addNewUser(this.state)
+            .then(() => this.props.history.push('/login'))
     }
 
     handleGenderSelect = e => {

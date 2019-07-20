@@ -3,6 +3,7 @@ import axios from 'axios';
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGOUT_START = "LOGOUT_START";
 export const ADD_NEW_USER_START = "ADD_NEW_USER_START";
 export const ADD_NEW_USER_SUCCESS = "ADD_NEW_USER_SUCCESS";
 export const ADD_NEW_USER_FAILURE = "ADD_NEW_USER_FAILURE";
@@ -15,9 +16,12 @@ export const login = (email, code) => dispatch => {
     dispatch({ type: LOGIN_START });
     return axios
         .post('https://friendfinder-bw19.herokuapp.com/auth/verify', { email, code })
-        .then(dispatch({ type: LOGIN_SUCCESS }))
-        .then(res => localStorage.setItem('token', res.data.token))
+        .then(dispatch({ type: LOGIN_SUCCESS }), res => localStorage.setItem('token', res.data.token))
         .catch(err => dispatch({ type: LOGIN_FAILURE, payload: err.message }));
+}
+
+export const logout = () => dispatch => {
+    dispatch({ type: LOGOUT_START })
 }
 
 export const sendCode = email => dispatch => {
