@@ -26,7 +26,7 @@ class NewUserForm extends Component {
             city: '',
             state: '',
             zip: '',
-            // interests: [],
+            interests: [],
             catchPhrase: ''
         }
     }
@@ -200,7 +200,7 @@ class NewUserForm extends Component {
                     </Col>
                 </Row>
 
-                {/* <FormGroup>
+                <FormGroup>
                     <Label>Interests</Label>
                     <Input type='select' name='interests' multiple onChange={this.handleInterestSelect}>
                         <option>Art</option>
@@ -217,7 +217,7 @@ class NewUserForm extends Component {
                         <option>Sports</option>
                         <option>Travel</option>
                     </Input>
-                </FormGroup> */}
+                </FormGroup>
 
                 <Button color='primary'>Submit</Button>
             </Form>
