@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { login } from '../actions';
+import { login, sendCode } from '../actions';
 
 import '../styles/Login.css';
 
@@ -12,27 +12,29 @@ class LoginForm extends Component {
         super(props)
 
         this.state = {
-            credentials: {
-                username: '',
-                password: ''
-            }
+            email: '',
+            creds: ''
         }
     }
 
     handleLogin = e => {
         e.preventDefault()
         this.props
-            .login(this.state.credentials)
-            .then(() => this.props.history.push('/userlanding'));
+            .login(this.state.email, this.state.creds)
+            .then(() => this.props.history.push('/userhomepage'));
+    }
+
+    handleSendCode = e => {
+        e.preventDefault()
+        this.props
+            .sendCode(this.state.email)
     }
 
     handleTextChange = e => {
         e.preventDefault()
         this.setState({
-            credentials: {
-                ...this.state.credentials,
-                [e.target.name]: e.target.value
-            }
+            ...this.state,
+            [e.target.name]: e.target.value
         })
     }
 
@@ -43,28 +45,29 @@ class LoginForm extends Component {
                 <h2>Login</h2>
 
                 <FormGroup>
-                    <Label>Username</Label>
+                    <Label>Email</Label>
                     <Input
                         type='text'
-                        name='username'
-                        value={this.state.username}
+                        name='email'
+                        value={this.state.email}
                         onChange={this.handleTextChange}
                         placeholder=''
                     />
                 </FormGroup>
-                
+
                 <FormGroup>
-                    <Label>Password</Label>
+                    <Label>Code</Label>
                     <Input
                         type='password'
-                        name='password'
-                        value={this.state.password}
+                        name='creds'
+                        value={this.state.creds}
                         onChange={this.handleTextChange}
                         placeholder=''
                     />
                 </FormGroup>
                 
-                <Button color='primary'>Login</Button>
+                <Button color='danger' onClick={this.handleSendCode}>Send Code</Button>
+                <Button color='primary' onClick={this.handleLogin}>Login</Button>
 
             </Form>
         )
@@ -73,5 +76,5 @@ class LoginForm extends Component {
 
 export default connect(
     null,
-    { login }
+    { login, sendCode }
 )(LoginForm);
