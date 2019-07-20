@@ -16,7 +16,8 @@ export const login = (email, code) => dispatch => {
     dispatch({ type: LOGIN_START });
     return axios
         .post('https://friendfinder-bw19.herokuapp.com/auth/verify', { email, code })
-        .then(dispatch({ type: LOGIN_SUCCESS }), res => localStorage.setItem('token', res.data.token))
+        .then(res => localStorage.setItem('token', res.data.token))
+        .then(dispatch({ type: LOGIN_SUCCESS }))
         .catch(err => dispatch({ type: LOGIN_FAILURE, payload: err.message }));
 }
 
