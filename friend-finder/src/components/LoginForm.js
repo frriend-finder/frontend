@@ -5,7 +5,7 @@ import { login, sendCode } from '../actions';
 
 import '../styles/Login.css';
 
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { TabContent, TabPane, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -13,7 +13,8 @@ class LoginForm extends Component {
 
         this.state = {
             email: '',
-            creds: ''
+            creds: '',
+            activeTab: '1'
         }
     }
 
@@ -26,8 +27,10 @@ class LoginForm extends Component {
 
     handleSendCode = e => {
         e.preventDefault()
+        console.log(this.state)
         this.props
             .sendCode(this.state.email)
+            .then(this.setState({activeTab: '2'}))
     }
 
     handleTextChange = e => {
@@ -40,41 +43,59 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <Form className='login-form' onSubmit={this.handleLogin}>
+            <Form className='login-form'>
 
                 <h2>Login</h2>
 
-                <FormGroup>
-                    <Label>Email</Label>
-                    <Input
-                        type='text'
-                        name='email'
-                        value={this.state.email}
-                        onChange={this.handleTextChange}
-                        placeholder=''
-                    />
-                </FormGroup>
+                <TabContent activeTab={this.state.activeTab}>
 
-                <FormGroup>
-                    <Label>Code</Label>
-                    <Input
-                        type='password'
-                        name='creds'
-                        value={this.state.creds}
-                        onChange={this.handleTextChange}
-                        placeholder=''
-                    />
-                </FormGroup>
-                
-                <Button color='danger' onClick={this.handleSendCode}>Send Code</Button>
-                <Button color='primary' onClick={this.handleLogin}>Login</Button>
+                    <TabPane tabId="1">
+                        <FormGroup>
+                            <Label>Email</Label>
+                            <Input
+                                type='email'
+                                name='email'
+                                value={this.state.email}
+                                onChange={this.handleTextChange}
+                                placeholder=''
+                            />
+                        </FormGroup>
+                    </TabPane>
+
+                    <TabPane tabId="2">
+                        <FormGroup>
+                            <Label>Code</Label>
+                            <Input
+                                type='password'
+                                name='creds'
+                                value={this.state.creds}
+                                onChange={this.handleTextChange}
+                                placeholder=''
+                            />
+                        </FormGroup>
+                    </TabPane>
+
+                    <Button color='primary' type='submit' onClick={(e) => {
+                        if (this.state.activeTab === '1') {
+                            this.handleSendCode(e)
+                        } else {
+                            this.handleLogin(e)
+                        }
+                    }}>{`${this.state.activeTab === '1' ? 'Send Code' : 'Login'}`}</Button>
+
+                </TabContent>
 
             </Form>
         )
     }
 }
 
+const mapStateToProps = state => ({
+    error: state.error,
+    code: state.code
+})
+
 export default connect(
-    null,
+    mapStateToProps,
     { login, sendCode }
 )(LoginForm);

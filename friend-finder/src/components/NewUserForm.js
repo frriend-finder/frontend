@@ -26,14 +26,16 @@ class NewUserForm extends Component {
             city: '',
             state: '',
             zip: '',
-            // interests: [],
+            interests: [],
             catchPhrase: ''
         }
     }
 
     handleAddUser = e => {
         e.preventDefault()
-        this.props.addNewUser(this.state)
+        this.props
+            .addNewUser(this.state)
+            .then(() => this.props.history.push('/login'))
     }
 
     handleGenderSelect = e => {
@@ -200,7 +202,7 @@ class NewUserForm extends Component {
                     </Col>
                 </Row>
 
-                {/* <FormGroup>
+                <FormGroup>
                     <Label>Interests</Label>
                     <Input type='select' name='interests' multiple onChange={this.handleInterestSelect}>
                         <option>Art</option>
@@ -217,7 +219,7 @@ class NewUserForm extends Component {
                         <option>Sports</option>
                         <option>Travel</option>
                     </Input>
-                </FormGroup> */}
+                </FormGroup>
 
                 <Button color='primary'>Submit</Button>
             </Form>
