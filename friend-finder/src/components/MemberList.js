@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import MemberCard from './MemberCard';
 import { connect } from 'react-redux';
-import { addToFriends } from '../actions';
+import { addToFriends, fetchMembers, fetchInterests } from '../actions';
+import LoaderComponent from './Loader';
 
 import '../styles/MembersList.css'
 
@@ -17,6 +18,10 @@ class MemberList extends Component {
    
 
 componentDidMount(){
+
+    this.props.fetchMembers() //makes the axios call to fetch members
+    this.props.fetchInterests() //makes the axios call to fetch interests
+
     this.setState({
         members: this.props.members,
         friends: this.props.friends
@@ -39,7 +44,9 @@ addToFriends = (member) => {
 
     render() {
         return (
-            <>
+
+            this.props.isFetchingMembers? <LoaderComponent /> :
+                <>
                     <div className = "members-list-header" >
                     <h1>Members List</h1>
                     <h2>Lets see who we can meet!</h2>
@@ -50,14 +57,14 @@ addToFriends = (member) => {
                    
                             {
 
-                                this.state.members.map(member => {
+                                this.props.members.map(member => {
                                    return  <MemberCard member= {member} key={member.id} addToFriends = {this.addToFriends} cardInstance = {this.instance}/>
 
                                 })
                             }
                     
                     </div>
-            </>
+                </>            
         )
     }
 }
@@ -65,8 +72,9 @@ addToFriends = (member) => {
 const mapStateToProps = state => {
     return {
         members: state.members,
-        friends: state.friends
+        friends: state.friends,
+        isFetchingMembers: state.isFetchingMembers
     }
 }
 
-export default connect(mapStateToProps, {addToFriends})(MemberList);
+export default connect(mapStateToProps, {addToFriends, fetchMembers, fetchInterests})(MemberList);

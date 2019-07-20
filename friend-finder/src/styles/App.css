@@ -19,4 +19,9 @@ html, body {
     margin-bottom: 50px;
   }
 
+  .loading-spinner-wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
   

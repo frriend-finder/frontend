@@ -1,18 +1,26 @@
 // import variable names from actions
 import {
-    LOGIN_START,
-    ADD_NEW_USER_START,
-    ADD_NEW_USER_SUCCESS,
-    ADD_NEW_USER_FAILURE,
-    ADD_TO_FRIENDS
+    LOGIN_START ,
+    ADD_TO_FRIENDS, 
+    FETCH_MEMBERS,
+    FETCH_MEMBERS_SUCCESS,
+    FETCH_MEMBERS_FAILURE,
+    FETCH_INTERESTS, 
+    FETCH_INTERESTS_SUCCESS, 
+    FETCH_INTERESTS_FAILURE,
+    FETCH_USER_INTERESTS, 
+    FETCH_USER_INTERESTS_SUCCESS, 
+    FETCH_USER_INTERESTS_FAILURE
 } from '../actions';
+
 
 const initialState = {
     loggingIn: false,
-    addingNewUser: false,
+    isFetchingMembers: false,
+    isFetchingUserInterests: false,
     error: '',
     members: [
-        {
+       /* {
             id:1,
             firstName: "John",
             lastName:"Smith",
@@ -61,10 +69,10 @@ const initialState = {
             zip:"45451",
             interestArray:["Food", "Movies", "Dancing", "Sports", "Music"] 
             
-        }
+        } */
     ], 
     friends: [
-        {
+       /* {
             id:3,
             firstName: "Mark",
             lastName:"White",
@@ -79,10 +87,10 @@ const initialState = {
             state:"California",
             zip:"45451",
             interestArray:["Food", "Movies", "Dancing", "Sports", "Music"]  
-        }
+        } */
     ],
     user: {
-        id:9,
+        id:1,
         firstName: "Jack",
         lastName:"Black",
         age:46,
@@ -95,8 +103,10 @@ const initialState = {
         city: "Dallas ",
         state:"Texas",
         zip:"12547",
-        interestArray:["Food", "Movies", "Dancing"] 
-    }
+        
+    }, 
+    userInterests:[/*Network call */],
+    interests:[/*"Food", "Movies", "Dancing"*/] 
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -107,33 +117,70 @@ const rootReducer = (state = initialState, action) => {
                 loggingIn: true
             };
 
-        case ADD_NEW_USER_START:
-            return {
-                ...state,
-                addingNewUser: true,
-                error: '',
-            };
-        
-        case ADD_NEW_USER_SUCCESS:
-            return {
-                ...state,
-                addingNewUser: false,
-                error: ''
-            };
-
-        case ADD_NEW_USER_FAILURE:
-            return {
-                ...state,
-                addingNewUser: false,
-                error: action.payload
-            };
-        
          case ADD_TO_FRIENDS:
-             console.log('FRIENDS STATE', state.friends)
-             return({
+             return {
                  ...state,
                  friends: [...state.friends, action.payload]
-             })  
+             }  
+
+        case FETCH_MEMBERS:
+            return {
+                ...state,
+                isFetchingMembers: true,
+                error: action.payload
+            }
+
+        case FETCH_MEMBERS_SUCCESS:
+            return {
+                ...state,
+                isFetchingMembers: false,
+                error:'',
+                members: action.payload
+            } 
+
+            //add the FETCH_MEMBERS_FAILURE
+
+
+            case FETCH_INTERESTS:
+                return {
+                    ...state,
+                    error: ''
+                }
+
+            case FETCH_INTERESTS_SUCCESS:
+                return {
+                    ...state,
+                    interests: action.payload,
+                    error: ''
+                }
+
+            case FETCH_INTERESTS_FAILURE:
+                return {
+                    ...state,
+                    err: action.payload
+                }    
+
+            case FETCH_USER_INTERESTS:
+                return {
+                    ...state,
+                    isFetchingUserInterests: true,
+                    err: ''
+                }
+
+            case FETCH_USER_INTERESTS_SUCCESS:
+                return {
+                    ...state,
+                    isFetchingUserInterests: false,
+                    userInterests: action.payload,
+                    err: ''
+                }
+              
+            case FETCH_USER_INTERESTS_FAILURE:
+                return {
+                    ...state,
+                    isFetchingUserInterests:false,
+                    err: action.payload
+                }    
 
         default:
             return state;
