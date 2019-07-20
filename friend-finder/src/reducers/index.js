@@ -10,8 +10,6 @@ import {
     ADD_NEW_USER_START,
     ADD_NEW_USER_SUCCESS,
     ADD_NEW_USER_FAILURE,
-    ADD_TO_FRIENDS
-    LOGIN_START ,
     ADD_TO_FRIENDS, 
     FETCH_MEMBERS,
     FETCH_MEMBERS_SUCCESS,
@@ -187,6 +185,7 @@ const rootReducer = (state = initialState, action) => {
             };
         
         case ADD_NEW_USER_SUCCESS:
+            return {
                 addingNewUser: false,
                 error: action.payload
             };
