@@ -187,8 +187,13 @@ const rootReducer = (state = initialState, action) => {
         case ADD_NEW_USER_SUCCESS:
             return {
                 addingNewUser: false,
-                error: action.payload
             };
+
+        case ADD_NEW_USER_FAILURE:
+            return {
+                addingNewUser: false,
+                error: action.payload
+            }
   
         case ADD_TO_FRIENDS:
              return {
