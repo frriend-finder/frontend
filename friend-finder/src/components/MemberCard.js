@@ -12,7 +12,7 @@ const MemberCard = props => {
 
     var CardButton;
     if (props.cardInstance === "memberlist"){
-       CardButton = <Button onClick = {(e) => {props.addToFriends(props.member)}}>Add to Friends</Button> 
+       CardButton = <Button onClick = {(e) => {props.handleAddToFriends(props.member)}}>Add to Friends</Button> 
     }else if (props.cardInstance === "userhomepage"){
         CardButton = <Button onClick = {function(e){return (e.preventDefault(), alert('You have sent a message to your friend'))}}>Message Friend</Button> 
      } 

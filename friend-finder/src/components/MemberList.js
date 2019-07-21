@@ -29,11 +29,11 @@ componentDidMount(){
 }
 
 
-addToFriends = (member) => {
+handleAddToFriends = (member) => {
     // Check our state to see if the friend was already added
     const currentFriend = this.state.friends.find(f => f.id === member.id)
     if(currentFriend){
-        alert('Friend already exists')
+        alert('Friend already added')
     } else {
         this.props.addToFriends(member) 
         this.setState({friends: [...this.state.friends, member]}) // to make this work you need to implement this here or else the redux state will not update the state here as the component never reloads just with above Redux state update
@@ -58,7 +58,7 @@ addToFriends = (member) => {
                             {
 
                                 this.props.members.map(member => {
-                                   return  <MemberCard member= {member} key={member.id} addToFriends = {this.addToFriends} cardInstance = {this.instance}/>
+                                   return  <MemberCard member= {member} key={member.id} handleAddToFriends = {this.handleAddToFriends} cardInstance = {this.instance}/>
 
                                 })
                             }
