@@ -37,6 +37,7 @@
 
 .tab-content-wrapper{
     margin: 2%;
+    min-height:500px;
 }
 
 .tab-content-wrapper .label-text{
@@ -62,10 +63,17 @@
     box-shadow: 2px 5px 8px rgba(0,0,0,0.2);
 }
 
-.delete-interest-button{
+.dropdown-select{
+    max-width: 300px;
+}
 
+.dropdown-select :only-child{
+    max-width: 300px;
+}
+
+.delete-interest-button{
   
-    position:fixed;
+    position:relative;
     margin-left:5%;
     text-align: center;
     margin-top:-10px;
@@ -73,6 +81,13 @@
     height:25px;
     box-shadow: 2px 5px 8px rgba(0,0,0,0.2);
     border-radius:3px;
+    background-color:tomato;
+    color:white;
 }
 
 
+.interest-buttons{
+    width:140px;
+    font-size:14px;
+    margin:10px 10px 10px 0
+}
