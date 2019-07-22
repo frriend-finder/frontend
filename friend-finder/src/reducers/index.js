@@ -303,7 +303,7 @@ const rootReducer = (state = initialState, action) => {
                 error: action.payload
             }
 
-        case FETCH_USER_START:
+        case FETCH_USER_START:    
             return{
                 ...state,
                 error:''

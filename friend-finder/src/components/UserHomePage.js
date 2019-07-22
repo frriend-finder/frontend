@@ -25,7 +25,6 @@ class UserHomePage extends React.Component {
    
 
    componentDidMount(){
-      // this.props.fetchUser(7)
        this.props.fetchInterests()
        setTimeout(()=> {
        this.setState({
