@@ -27,7 +27,6 @@ class LoginForm extends Component {
 
     handleSendCode = e => {
         e.preventDefault()
-        console.log(this.state)
         this.props
             .sendCode(this.state.email)
             .then(this.setState({activeTab: '2'}))

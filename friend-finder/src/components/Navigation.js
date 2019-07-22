@@ -24,7 +24,7 @@ class Navigation extends React.Component{
 
                 {
                     this.props.isLoggedIn? 
-                    <><li><Link to="/">Home</Link></li> | <li><Link to="/" onClick={this.handleLogOut}>Log Out</Link></li> | <li><Link to="/memberslist">Find Friends</Link></li> </> :
+                    <><li><Link to="/userhomepage">Home</Link></li> | <li><Link to="/" onClick={this.handleLogOut}>Log Out</Link></li> | <li><Link to="/memberslist">Find Friends</Link></li> </> :
                     <><li><Link to="/">Home</Link></li> | <li><Link to="/login">Login</Link></li> </>
                 }
                 

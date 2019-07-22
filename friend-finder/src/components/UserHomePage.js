@@ -92,6 +92,7 @@ render(){
                     loading ={false}
                     dropdownHeight = "300px"
                     labelField = "name"
+                    valueField="id"
                     options={this.props.interests}
                     onChange={(values) => this.setValues(values)}
                         />
