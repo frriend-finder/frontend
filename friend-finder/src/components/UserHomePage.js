@@ -18,33 +18,42 @@ class UserHomePage extends React.Component {
         user: {},
         interests: [],
         userInterests: [],
-        userid: undefined
+        friends:[]
     }
 
     instance = "userhomepage";
    
 
-    componentDidMount() {
-        this.props.fetchUser(4) 
-        this.props.fetchInterests()
-        this.props.fetchUserInterests(this.props.user.id)
-        setTimeout(()=> this.setState({
-            parsedUserInterests: this.parseInterestsToString()
-       }),3000) 
-
+   componentDidMount(){
+      // this.props.fetchUser(7)
+       this.props.fetchInterests()
        setTimeout(()=> {
        this.setState({
-            user: this.props.user,
+            user: {...this.props.user},
             interests: this.props.interests,
-            UserInterests: this.props.userInterests
-       })},4000)
+            userInterests: this.props.user.interests,
+            friends: this.props.friends
+       })},1000)
+       
 
-       setTimeout(()=>{console.log(this.state.user, this.state.userInterests, this.state.interests)},5000)
+       setTimeout(()=>{
+            this.setState({
+                parsedUserInterests: this.parseInterestsToString()
+            })
+       },3000)
+       setTimeout(()=>{console.log(this.state.user, this.state.userInterests)},3000)
     }
 
-    fetchUserInterestsHelper = (cb, id)=> {
-        cb(this.props.user.id, id).then(()=>
-        this.props.fetchUserInterests(this.props.user.id))
+    fetchUserInterestsHelper = (cb, id)=>{
+        cb(this.state.user.id, id)
+
+        setTimeout(()=>
+        this.props.fetchUser(this.state.user.id),2000)
+
+        setTimeout(() =>  {
+        this.setState({userInterests: this.props.user.interests})
+        console.log(this.props.user.interests)},3000)
+       
         setTimeout(()=> this.setState({
             parsedUserInterests: this.parseInterestsToString()
        }),3000) 
@@ -53,21 +62,21 @@ class UserHomePage extends React.Component {
     parseInterestsToString = () => { 
     // this compares the interests pulled in from the db to the users intersts and returns a string rather than a number.
         const localarray = []
-        for (let i = 0; i < this.props.userInterests.length; i++) {
-            for (let j = 0; j < this.props.interests.length; j++) {
-                if (this.props.userInterests[i] === this.props.interests[j].id) {
-                         localarray.push(this.props.interests[j])
+        for (let i = 0; i < this.state.userInterests.length; i++) {
+            for (let j = 0; j < this.state.interests.length; j++) {
+                if (this.state.userInterests[i] === this.state.interests[j].name) {
+                         localarray.push(this.state.interests[j])
                 }
             }
         }
         return localarray
     }
    
-    addSelectedInterests = (userid, interestid) => {
+    addSelectedInterests = () => {
         if (this.state.selectedValues.length === 0) {
             alert("No interest to add, please select one.")
         } else{ 
-            const interestID = this.props.interests.find(interest => {
+            const interestID = this.state.interests.find(interest => {
                 return interest.name === this.state.selectedValues[0].name
         })
         this.onChange([])
@@ -75,16 +84,16 @@ class UserHomePage extends React.Component {
         }
     }
 
-
+    deleteClickHandler = (id) => {
+        this.fetchUserInterestsHelper(this.props.deleteUserInterest, id)
+     }
+ 
     onChange = (values) => {
         this.setState({
             selectedValues: values
         })
     }
 
-    deleteClickHandler = (id) => {
-       this.fetchUserInterestsHelper(this.props.deleteUserInterest, id)
-    }
 
 
     render() {
@@ -93,8 +102,8 @@ class UserHomePage extends React.Component {
             <>
                 <div className="user-info-wrapper">
                     <div className="user-header-wrapper">
-                        <img src={`${this.props.user.profileimage}`} alt="user" />
-                        <h1>Hello {this.props.user.firstName + " " + this.props.user.lastName}, lets make <span>Friends</span> !</h1>
+                        <img src={`${this.state.user.profileimage}`} alt="user" />
+                        <h1>Hello {this.state.user.firstName + " " + this.state.user.lastName}, lets make <span>Friends</span> !</h1>
                     </div>
                 </div>
 
@@ -143,7 +152,7 @@ class UserHomePage extends React.Component {
                                                 dropdownHeight="300px"
                                                 labelField="name"
                                                 valueField="id"
-                                                options={this.props.interests}
+                                                options={this.state.interests}
                                                 onChange={(value) => {
                                                     this.onChange(value)
                                                 }}
@@ -169,7 +178,7 @@ class UserHomePage extends React.Component {
                                 <h2>My Friends:</h2>
                                 <div className="members-list-wrapper">
                                     {
-                                        this.props.friends.map(friend => {
+                                        this.state.friends.map(friend => {
                                             return <MemberCard member={friend} cardInstance={this.instance} key={friend.id} />
                                         })
                                     }
