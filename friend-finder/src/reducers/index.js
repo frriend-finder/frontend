@@ -10,7 +10,9 @@ import {
     ADD_NEW_USER_START,
     ADD_NEW_USER_SUCCESS,
     ADD_NEW_USER_FAILURE,
-    ADD_TO_FRIENDS, 
+    ADD_TO_FRIENDS_START,
+    ADD_TO_FRIENDS_SUCCESS,
+    ADD_TO_FRIENDS_FAILURE, 
     FETCH_MEMBERS,
     FETCH_MEMBERS_SUCCESS,
     FETCH_MEMBERS_FAILURE,
@@ -195,7 +197,7 @@ const rootReducer = (state = initialState, action) => {
                 error: action.payload
             }
   
-        case ADD_TO_FRIENDS:
+        case ADD_TO_FRIENDS_START:
              return {
                  ...state,
                  friends: [...state.friends, action.payload]
@@ -214,57 +216,48 @@ const rootReducer = (state = initialState, action) => {
                 isFetchingMembers: false,
                 error:'',
                 members: action.payload
-            } 
-        
-        case ADD_TO_FRIENDS:
-            console.log('FRIENDS STATE', state.friends)
-            return({
+            }
+
+        case FETCH_INTERESTS:
+            return {
                 ...state,
-                friends: [...state.friends, action.payload]
-            })  
+                error: ''
+            }
 
-            //add the FETCH_MEMBERS_FAILURE
+        case FETCH_INTERESTS_SUCCESS:
+            return {
+                ...state,
+                interests: action.payload,
+                error: ''
+            }
 
-            case FETCH_INTERESTS:
-                return {
-                    ...state,
-                    error: ''
-                }
+        case FETCH_INTERESTS_FAILURE:
+            return {
+                ...state,
+                err: action.payload
+            }    
 
-            case FETCH_INTERESTS_SUCCESS:
-                return {
-                    ...state,
-                    interests: action.payload,
-                    error: ''
-                }
+        case FETCH_USER_INTERESTS:
+            return {
+                ...state,
+                isFetchingUserInterests: true,
+                err: ''
+            }
 
-            case FETCH_INTERESTS_FAILURE:
-                return {
-                    ...state,
-                    err: action.payload
-                }    
-
-            case FETCH_USER_INTERESTS:
-                return {
-                    ...state,
-                    isFetchingUserInterests: true,
-                    err: ''
-                }
-
-            case FETCH_USER_INTERESTS_SUCCESS:
-                return {
-                    ...state,
-                    isFetchingUserInterests: false,
-                    userInterests: action.payload,
-                    err: ''
-                }
-              
-            case FETCH_USER_INTERESTS_FAILURE:
-                return {
-                    ...state,
-                    isFetchingUserInterests:false,
-                    err: action.payload
-                }    
+        case FETCH_USER_INTERESTS_SUCCESS:
+            return {
+                ...state,
+                isFetchingUserInterests: false,
+                userInterests: action.payload,
+                err: ''
+            }
+            
+        case FETCH_USER_INTERESTS_FAILURE:
+            return {
+                ...state,
+                isFetchingUserInterests:false,
+                err: action.payload
+            }    
 
         default:
             return state;

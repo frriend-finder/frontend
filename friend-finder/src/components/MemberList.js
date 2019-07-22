@@ -35,7 +35,7 @@ handleAddToFriends = (member) => {
     if(currentFriend){
         alert('Friend already added')
     } else {
-        this.props.addToFriends(member) 
+        this.props.addToFriends(this.props.user.id, member.id) 
         this.setState({friends: [...this.state.friends, member]}) // to make this work you need to implement this here or else the redux state will not update the state here as the component never reloads just with above Redux state update
         alert(`${member.firstName + " " + member.lastName} has been added to your Friends List!`)
     }
@@ -73,6 +73,7 @@ const mapStateToProps = state => {
     return {
         members: state.members,
         friends: state.friends,
+        user: state.user,
         isFetchingMembers: state.isFetchingMembers
     }
 }

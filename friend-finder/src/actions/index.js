@@ -7,8 +7,9 @@ export const LOGOUT_START = "LOGOUT_START";
 export const ADD_NEW_USER_START = "ADD_NEW_USER_START";
 export const ADD_NEW_USER_SUCCESS = "ADD_NEW_USER_SUCCESS";
 export const ADD_NEW_USER_FAILURE = "ADD_NEW_USER_FAILURE";
-export const ADD_TO_FRIENDS = "ADD_TO_FRIENDS";
-
+export const ADD_TO_FRIENDS_START = "ADD_TO_FRIENDS_START";
+export const ADD_TO_FRIENDS_SUCCESS = "ADD_TO_FRIENDS_SUCCESS";
+export const ADD_TO_FRIENDS_FAILURE = "ADD_TO_FRIENDS_FAILURE";
 export const FETCH_MEMBERS = "GET_MEMBERS";
 export const FETCH_MEMBERS_SUCCESS = "GET_MEMBERS_SUCCESS";
 export const FETCH_MEMBERS_FAILURE = "GET_MEMBERS_FAILURE";
@@ -75,10 +76,10 @@ export const fetchUserInterests = (id) =>  dispatch => {
 }
 
 
-export const addToFriends = member =>{ 
-    console.log('Member in action',member)
-        return({
-            type: ADD_TO_FRIENDS,
-            payload: member
-        })
+export const addToFriends = (user, friend) => dispatch => { 
+    dispatch({ type: ADD_TO_FRIENDS_START })
+        axios
+            .post(`https://friendfinder-bw19.herokuapp.com/friends`, { user, friend })
+            .then(res => dispatch({ type: ADD_TO_FRIENDS_SUCCESS }))
+            .catch(err => dispatch({ type: ADD_TO_FRIENDS_FAILURE, payload: err.message }))
 }
