@@ -26,8 +26,11 @@ function App() {
         <Route path='/signup' component={NewUserForm} />
 
         <Route path='/memberslist' component={MembersList} />
+
+
         <PrivateRoute exact path='/userhomepage' component={UserHomePage} /> 
      {/* <Route  path='/userhomepage' component={UserHomePage} /> */ }
+
         </div>
         <Footer />
       </div>
