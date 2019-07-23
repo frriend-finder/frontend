@@ -112,20 +112,22 @@ const initialState = {
          } */
     ],
     user: {
-       /* id: 1,
-        firstName: "Jack",
-        lastName: "Black",
-        age: 46,
-        emailAddress: "jack@email.com",
-        gender: "Male",
-        phone: "559-559-1256",
-        profileimage: 'https://image.shutterstock.com/image-photo/portrait-mixed-race-man-600w-1216778014.jpg',
-        catchPhrase: "Autobots roll out",
-        address: "4875 Jupiter Rd",
-        city: "Dallas ",
-        state: "Texas",
-        zip: "12547", */
+        id: 0,
+        firstName: "",
+        lastName: "",
+        age: 0,
+        emailAddress: "",
+        gender: "",
+        phone: "",
+        profileimage: '',
+        catchPhrase: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "", 
+        interests:[]
     },
+
     userInterests: [/*Network call */],
     interests: [/*"Food", "Movies", "Dancing"*/]
 }
@@ -274,7 +276,7 @@ const rootReducer = (state = initialState, action) => {
         case ADD_USER_INTEREST_SUCCESS:
             return {
                 ...state,
-                userInterests: action.payload,
+                user: action.payload,
                 error: ''
             }
 
@@ -293,9 +295,10 @@ const rootReducer = (state = initialState, action) => {
         case DELETE_USER_INTEREST_SUCCESS:
             return {
                 ...state,
-                userInterests: action.payload,
+                user: action.payload,
                 error: ''
             }
+
 
         case DELETE_USER_INTEREST_FAILURE:
             return {
@@ -314,6 +317,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 error:'',
                 user: action.payload
+                
             }
          
         case FETCH_USER_FAILURE:

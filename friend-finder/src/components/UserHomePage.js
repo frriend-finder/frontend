@@ -17,76 +17,43 @@ class UserHomePage extends React.Component {
         parsedUserInterests: [],
         user: {},
         interests: [],
-        userInterests: [],
-        friends:[]
+        userInterests: [{}],
+        friends: []
     }
 
     instance = "userhomepage";
-   
 
-   componentDidMount(){
-       this.props.fetchInterests()
-       setTimeout(()=> {
-       this.setState({
-            user: {...this.props.user},
+
+    componentDidMount() {
+
+        this.props.fetchInterests()
+        this.setState({
+            user: this.props.user,
             interests: this.props.interests,
             userInterests: this.props.user.interests,
             friends: this.props.friends
-       })},1000)
-       
-
-       setTimeout(()=>{
-            this.setState({
-                parsedUserInterests: this.parseInterestsToString()
-            })
-       },3000)
-       setTimeout(()=>{console.log(this.state.user, this.state.userInterests)},3000)
+        })
+    }
+    fetchUserInterestsHelper = (cb, id) => {
+        cb(this.props.user.id, id)
     }
 
-    fetchUserInterestsHelper = (cb, id)=>{
-        cb(this.state.user.id, id)
-
-        setTimeout(()=>
-        this.props.fetchUser(this.state.user.id),2000)
-
-        setTimeout(() =>  {
-        this.setState({userInterests: this.props.user.interests})
-        console.log(this.props.user.interests)},3000)
-       
-        setTimeout(()=> this.setState({
-            parsedUserInterests: this.parseInterestsToString()
-       }),3000) 
-    }
-
-    parseInterestsToString = () => { 
-    // this compares the interests pulled in from the db to the users intersts and returns a string rather than a number.
-        const localarray = []
-        for (let i = 0; i < this.state.userInterests.length; i++) {
-            for (let j = 0; j < this.state.interests.length; j++) {
-                if (this.state.userInterests[i] === this.state.interests[j].name) {
-                         localarray.push(this.state.interests[j])
-                }
-            }
-        }
-        return localarray
-    }
-   
     addSelectedInterests = () => {
         if (this.state.selectedValues.length === 0) {
             alert("No interest to add, please select one.")
-        } else{ 
+        } else {
             const interestID = this.state.interests.find(interest => {
                 return interest.name === this.state.selectedValues[0].name
-        })
-        this.onChange([])
-        this.fetchUserInterestsHelper(this.props.addUserInterest, interestID.id)
+            })
+            this.onChange([])
+            this.fetchUserInterestsHelper(this.props.addUserInterest, interestID.id)
         }
     }
 
     deleteClickHandler = (id) => {
         this.fetchUserInterestsHelper(this.props.deleteUserInterest, id)
-     }
- 
+    }
+
     onChange = (values) => {
         this.setState({
             selectedValues: values
@@ -96,13 +63,12 @@ class UserHomePage extends React.Component {
 
 
     render() {
-
         return (
             <>
                 <div className="user-info-wrapper">
                     <div className="user-header-wrapper">
-                        <img src={`${this.state.user.profileimage}`} alt="user" />
-                        <h1>Hello {this.state.user.firstName + " " + this.state.user.lastName}, lets make <span>Friends</span> !</h1>
+                        <img src={`${this.props.user.profileimage}`} alt="user" />
+                        <h1>Hello {this.props.user.firstName + " " + this.props.user.lastName}, lets make <span>Friends</span> !</h1>
                     </div>
                 </div>
 
@@ -157,13 +123,13 @@ class UserHomePage extends React.Component {
                                                 }}
                                                 values={[...this.state.selectedValues]}
                                             />
-                                            <Button className="interest-buttons" onClick={() => { this.addSelectedInterests() }}>Add Interest</Button> 
-                                            <Button  className="interest-buttons" variant="secondary" onClick={() => this.onChange([])}>Clear Selection</Button>
+                                            <Button className="interest-buttons" onClick={() => { this.addSelectedInterests() }}>Add Interest</Button>
+                                            <Button className="interest-buttons" variant="secondary" onClick={() => this.onChange([])}>Clear Selection</Button>
                                             {
-                                                this.state.parsedUserInterests.map(interest => {
-                                                return <div className="interest-content">
+                                                this.props.user.interests && this.props.user.interests.map(interest => {
+                                                    return <div className="interest-content">
                                                         <h3>{interest.name}</h3>
-                                                        <button className="delete-interest-button" onClick={()=>{this.deleteClickHandler(interest.id)}}>X</button> 
+                                                        <button className="delete-interest-button" onClick={() => { this.deleteClickHandler(interest.id) }}>X</button>
                                                     </div>
                                                 })
                                             }
@@ -181,7 +147,7 @@ class UserHomePage extends React.Component {
                                             return <MemberCard member={friend} cardInstance={this.instance} key={friend.id} />
                                         })
                                     }
-                                  
+
                                 </div>
                             </div>
                         </Tab>
@@ -201,7 +167,6 @@ class UserHomePage extends React.Component {
 }
 
 const mapStateToProps = state => {
-
     return {
         user: state.user,
         friends: state.friends,

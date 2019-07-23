@@ -26,13 +26,11 @@ function App() {
         <Route path='/signup' component={NewUserForm} />
 
         <Route path='/memberslist' component={MembersList} />
-<<<<<<< HEAD
-       {/* <PrivateRoute exact path='/userhomepage' component={UserHomePage} /> */}
-       <Route path='/userhomepage' component={UserHomePage} />
-=======
+
+
         <PrivateRoute exact path='/userhomepage' component={UserHomePage} /> 
      {/* <Route  path='/userhomepage' component={UserHomePage} /> */ }
->>>>>>> 8e29426a04d3b4885a6812a053c9079bcac5e029
+
         </div>
         <Footer />
       </div>
