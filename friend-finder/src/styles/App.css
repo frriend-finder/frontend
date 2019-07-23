@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  #root{
+
+  min-height:100%;
+  }
+
+  .App{
+   
+    min-height:100%;
+  }
+
+
+  .main-wrapper{
+    min-height: 100%;
+    margin-bottom: 50px;
+  }
+
+  .loading-spinner-wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
