@@ -1,0 +1,4 @@
+[build]
+base = "friend-finder/"
+publish = "friend-finder/build"
+command = "yarn build"
